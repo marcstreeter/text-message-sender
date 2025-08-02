@@ -1,0 +1,6 @@
+.venv
+*.csv
+class_list.json
+question_list.json
+
+*.pyc

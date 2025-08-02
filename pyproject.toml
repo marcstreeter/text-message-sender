@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "sundayschool"
+version = "0.1.0"
+description = ""
+authors = ["Marc Streeter <mstreeter@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+typer = "^0.15.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+
+[tool.poetry.scripts]
+question = "sundayschool.question:app"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
