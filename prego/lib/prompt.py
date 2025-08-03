@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from sundayschool.lib.terminal import clear_terminal
+from prego.lib.terminal import clear_terminal
 
 URL = "https://www.churchofjesuschrist.org/study/manual"
 

@@ -1,5 +1,5 @@
 [project]
-name = "sundayschool"
+name = "prego"
 version = "0.1.0"
 description = ""
 authors = [
@@ -17,7 +17,7 @@ dev = [
 ]
 
 [project.scripts]
-question = "sundayschool.question:app"
+prego = "prego.question:app"
 
 [build-system]
 requires = ["hatchling"]

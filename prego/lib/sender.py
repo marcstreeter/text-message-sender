@@ -1,7 +1,7 @@
 import subprocess
 
-from sundayschool.lib.terminal import clear_terminal
-from sundayschool.lib.log import record_message_log
+from prego.lib.terminal import clear_terminal
+from prego.lib.log import record_message_log
 
 # Function to send a text message (via AppleScript for macOS)
 def send_text(phone: str, message: str) -> None:
@@ -20,7 +20,7 @@ def send_all_messages(messages_to_send: list[dict]) -> tuple[list[dict], list[di
     for msg in messages_to_send:
         clear_terminal()
         print(f"Ready to send to {msg['name']} ({msg['phone']}):\n{msg['message']}")
-        send_choice: str = input("Send this message? (Y/N): ").strip().lower()
+        send_choice: str = input("Send this message? (y/N): ").strip().lower()
         if send_choice == "y":
             try:
                 send_text(msg["phone"], msg["message"])

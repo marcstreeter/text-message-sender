@@ -1,8 +1,9 @@
 import typer
 
-from sundayschool.lib import (
+from prego.lib import (
     data,
     log,
+    outbox,
     prompt,
     sender,
 )
@@ -10,18 +11,26 @@ from sundayschool.lib import (
 app = typer.Typer()
 
 @app.command()
-def send_messages(
-    class_list_file: str = typer.Argument("class_list.json", help="Path to the class list JSON file"),
-    question_list_file: str = typer.Argument("question_list.json", help="Path to the question list JSON file")
-) -> None:
+def send_messages() -> None:
     """
-    Compose and send messages to a class list using questions from a provided JSON file.
+    Compose and send messages to a class list using questions from the outbox directory.
     """
-    # Step 0: Load class list, questions, and message log
-    class_list: list[dict] = data.load_json(class_list_file)
-    questions: list[dict] = data.load_json(question_list_file)
+    # Step 0: Find files in outbox and load data
+    print("Looking for class and question lists in outbox/...")
+    class_list_path, question_list_path = outbox.find_outbox_files()
+    
+    if not class_list_path or not question_list_path:
+        print("Error: Could not find both class list and question list files in outbox/")
+        outbox.display_outbox_status()
+        return
+    
+    print(f"Using class list: {class_list_path}")
+    print(f"Using question list: {question_list_path}")
+    
+    class_list: list[dict] = data.load_json(class_list_path)
+    questions: list[dict] = data.load_json(question_list_path)
     if not (class_list and questions):
-        print("Must have a class and questions. Exiting.")
+        print("Error: Could not load class list or question list. Exiting.")
         return
     log_file = log.get_log_file()
     message_log: list[dict] = log.load_message_log(log_file)

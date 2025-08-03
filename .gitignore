@@ -6,3 +6,5 @@ question_list.json
 *.pyc
 
 .DS_Store
+
+logs/*

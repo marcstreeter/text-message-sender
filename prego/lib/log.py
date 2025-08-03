@@ -16,8 +16,12 @@ def record_message_log(name: str, phone: str, message: str, full_name: str = Non
 
 # Function to get the current log file name
 def get_log_file() -> str:
-    today = datetime.now().strftime("%Y-%m-%d")
-    return f"messages-{today}.json"
+    now = datetime.now()
+    date_str = now.strftime("%Y-%m-%d")
+    time_str = now.strftime("%H%M")  # 24-hour format without seconds
+    # Ensure logs directory exists
+    os.makedirs("logs", exist_ok=True)
+    return f"logs/messages-{date_str}-{time_str}.json"
 
 
 
